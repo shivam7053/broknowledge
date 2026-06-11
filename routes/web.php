@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\BlogController;
 use App\Models\Course;
 use App\Models\Post;
@@ -21,3 +22,29 @@ Route::get('/courses/{course:slug}/{topic:slug?}', [CourseController::class, 'sh
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
+
+Route::get('/tools', function () {
+    return view('tools');
+})->name('tools');
+
+Route::view('/compilers', 'compilers')->name('compilers');
+
+Route::view('/privacy', 'privacy')->name('privacy');
+Route::view('/terms', 'terms')->name('terms');
+
+
+Route::view('/games', 'games')->name('games');
+Route::view('/games/card', 'games.card')->name('games.card');
+Route::view('/games/snake', 'games.snake')->name('games.snake');
+Route::view('/games/tetris', 'games.tetris')->name('games.tetris');
+Route::view('/games/shooter', 'games.shooter')->name('games.shooter');
+Route::view('/games/bomber', 'games.bomber')->name('games.bomber');
+
+// Quiz Routes
+Route::prefix('quizzes')->name('quizzes.')->group(function () {
+    Route::get('/', [QuizController::class, 'index'])->name('index');
+    Route::get('/{quizCategory:slug}', [QuizController::class, 'showCategoryQuizzes'])->name('showCategoryQuizzes');
+    Route::get('/take/{quiz:slug}', [QuizController::class, 'takeQuiz'])->name('take');
+    // Route for submitting quiz results (will be implemented later)
+    Route::post('/submit/{quiz:slug}', [QuizController::class, 'submitQuiz'])->name('submit');
+});

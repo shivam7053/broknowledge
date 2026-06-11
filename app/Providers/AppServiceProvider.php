@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        try {
+            if (!Schema::hasTable('sessions')) {
+                Artisan::call('migrate', ['--force' => true]);
+            }
+        } catch (\Throwable $e) {
+            // Silence connection errors here so Laravel handles them normally if the DB isn't configured yet
+        }
     }
 }
