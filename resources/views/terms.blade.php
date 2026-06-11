@@ -25,6 +25,7 @@
             <div class="legal-section">
                 <h2><i class="bi bi-check-circle"></i> Acceptance of Terms</h2>
                 <p>By accessing and using BroKnowledge, you agree to comply with and be bound by these Terms of Use. If you do not agree, please refrain from using our services.</p>
+                <p>By accessing and using Bro, you agree to comply with and be bound by these Terms of Use. If you do not agree, please refrain from using our services.</p>
             </div>
 
             <div class="legal-section">
@@ -35,11 +36,13 @@
             <div class="legal-section">
                 <h2><i class="bi bi-patch-check"></i> Intellectual Property</h2>
                 <p>All content, including course materials, website design, and proprietary code snippets, are the property of BroKnowledge. You are granted a limited license to use these materials for personal, non-commercial educational purposes.</p>
+                <p>All content, including course materials, website design, and proprietary code snippets, are the property of Bro. You are granted a limited license to use these materials for personal, non-commercial educational purposes.</p>
             </div>
 
             <div class="legal-section">
                 <h2><i class="bi bi-exclamation-triangle"></i> Disclaimer of Warranties</h2>
                 <p>Our tools and compilers are provided "as is" without any warranties. While we strive for 100% accuracy, BroKnowledge is not responsible for any data loss or errors resulting from the use of our client-side office tools or code execution environments.</p>
+                <p>Our tools and compilers are provided "as is" without any warranties. While we strive for 100% accuracy, Bro is not responsible for any data loss or errors resulting from the use of our client-side office tools or code execution environments.</p>
             </div>
 
             <div class="legal-section">
