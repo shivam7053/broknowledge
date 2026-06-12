@@ -509,7 +509,7 @@
         <div class="container-fluid px-lg-5 d-flex align-items-center justify-content-between gap-3">
 
             <a href="/" class="navbar-brand">
-                <img :src="darkMode ? '{{ asset('logo/logo-dark.png') }}' : '{{ asset('logo/logo-light.png') }}'" alt="BroKnowledge" class="nav-logo">
+                <img :src="darkMode ? '{{ asset('logo/logo-dark.png') }}' : '{{ asset('logo/logo-light.png') }}'" alt="BroKnowledge Logo" class="nav-logo">
             </a>
 
             <div class="d-flex align-items-center gap-2">
@@ -541,13 +541,17 @@
                            class="bk-nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}">
                             <span class="material-symbols-outlined">article</span> Blog
                         </a>
-                        <a href="{{ route('tools') }}"
-                           class="bk-nav-link accent {{ request()->routeIs('tools') ? 'active' : '' }}">
+                        <a href="{{ route('tools.index') }}"
+                           class="bk-nav-link accent {{ request()->routeIs('tools.*') ? 'active' : '' }}">
                             <span class="material-symbols-outlined">build</span> Tools
                         </a>
-                        <a href="{{ route('compilers') }}"
-                           class="bk-nav-link accent {{ request()->routeIs('compilers') ? 'active' : '' }}">
-                            <span class="material-symbols-outlined">terminal</span> Compilers
+                        <a href="{{ route('quizzes.index') }}"
+                           class="bk-nav-link accent {{ request()->routeIs('quizzes.*') ? 'active' : '' }}">
+                            <span class="material-symbols-outlined">quiz</span> Quizzes
+                        </a>
+                        <a href="{{ route('apis.index') }}"
+                           class="bk-nav-link accent {{ request()->routeIs('apis.*') ? 'active' : '' }}">
+                            <span class="material-symbols-outlined">api</span> Free APIs
                         </a>
                     </div>
                 @endif
@@ -564,7 +568,7 @@
             <div class="row g-5">
                 <div class="col-lg-4">
                     <a href="/" class="footer-brand d-inline-flex align-items-center gap-2 mb-3">
-                        <img :src="darkMode ? '{{ asset('logo/logo-dark.png') }}' : '{{ asset('logo/logo-light.png') }}'" alt="BroKnowledge" class="footer-logo">
+                        <img :src="darkMode ? '{{ asset('logo/logo-dark.png') }}' : '{{ asset('logo/logo-light.png') }}'" alt="BroKnowledge Footer Logo" class="footer-logo">
                     </a>
                     <p class="small mb-4" style="color: var(--muted); line-height: 1.7; max-width: 280px;">
                         A workspace for developers and learners — courses, tools, compilers, and games, all in one place.
@@ -594,11 +598,14 @@
                 <div class="col-6 col-md-3 col-lg-2">
                     <div class="footer-heading">Workspace</div>
                     <div class="d-flex flex-column gap-2">
-                        <a href="{{ route('tools') }}" class="footer-link">
+                        <a href="{{ route('tools.index') }}" class="footer-link">
                             <span class="material-symbols-outlined">build</span> Office Tools
                         </a>
-                        <a href="{{ route('compilers') }}" class="footer-link">
-                            <span class="material-symbols-outlined">terminal</span> Compilers
+                        <a href="{{ route('quizzes.index') }}" class="footer-link">
+                            <span class="material-symbols-outlined">quiz</span> Quizzes
+                        </a>
+                        <a href="{{ route('apis.index') }}" class="footer-link">
+                            <span class="material-symbols-outlined">api</span> Free APIs
                         </a>
                     </div>
                 </div>

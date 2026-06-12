@@ -1,7 +1,8 @@
 {{-- quizzes/categories.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Quiz Categories')
+@section('title', 'Developer Quiz Categories')
+@section('meta_description', 'Test your knowledge with our developer quizzes. Choose from various categories like web development, programming languages, and algorithms. Instant results and challenges.')
 
 @section('content')
 

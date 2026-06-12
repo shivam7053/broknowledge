@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Terms of Use')
+@section('meta_description', 'Read the Terms of Use for BroKnowledge. Learn about service acceptance, intellectual property, disclaimers, and modifications to our platform.')
 
 @section('content')
 <style>

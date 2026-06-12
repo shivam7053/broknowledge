@@ -1,11 +1,10 @@
 {{-- compilers.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Code Playground')
+@section('title', 'Online Code Playground')
+@section('meta_description', 'Write, run, and preview code instantly in your browser. Supports HTML/CSS/JS, Python, C++, Java, and PHP. No setup required.')
 
 @section('content')
-
-<script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
 
 <style>
     /* ══════════════════════════════════════════════
@@ -101,6 +100,8 @@
     .tab-dot-html  { background: #f97316; }
     .tab-dot-py    { background: #3b82f6; }
     .tab-dot-java  { background: #ef4444; }
+    .tab-dot-cpp   { background: #6366f1; }
+    .tab-dot-php   { background: #777bb4; }
 
     /* ── Workspace panel ───────────────────────── */
     .compiler-panel {
@@ -235,7 +236,10 @@
 </style>
 
 <div class="container-fluid px-lg-5 py-2"
-     x-data="{ activeTool: 'html-compiler' }">
+     x-data="{ 
+        activeTool: 'html-compiler',
+        pistonApi: 'https://emkc.org/api/v2/piston/execute'
+     }">
 
     {{-- ── Hero ──────────────────────────────────────────── --}}
     <div class="compilers-hero reveal">
@@ -269,11 +273,23 @@
                         <span class="compiler-tab-dot tab-dot-py"></span>
                         Python 3.x
                     </button>
+                    <button @click="activeTool = 'cpp-compiler'"
+                            :class="activeTool === 'cpp-compiler' ? 'active' : ''"
+                            class="compiler-tab">
+                        <span class="compiler-tab-dot tab-dot-cpp"></span>
+                        C++ (GCC 10)
+                    </button>
                     <button @click="activeTool = 'java-compiler'"
                             :class="activeTool === 'java-compiler' ? 'active' : ''"
                             class="compiler-tab">
                         <span class="compiler-tab-dot tab-dot-java"></span>
-                        Java (Backend)
+                        Java 15
+                    </button>
+                    <button @click="activeTool = 'php-compiler'"
+                            :class="activeTool === 'php-compiler' ? 'active' : ''"
+                            class="compiler-tab">
+                        <span class="compiler-tab-dot tab-dot-php"></span>
+                        PHP 8.x
                     </button>
                 </div>
             </div>
@@ -319,11 +335,23 @@
                      output: '',
                      isLoading: false,
                      pyodide: null,
+                     async loadPyodideScript() {
+                         if (!window.loadPyodide) { // Check if pyodide is already loaded
+                             const script = document.createElement('script');
+                             script.src = 'https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js';
+                             script.onload = () => console.log('Pyodide script loaded.');
+                             document.head.appendChild(script);
+                             await new Promise(resolve => script.onload = resolve); // Wait for script to load
+                         }
+                     },
                      async run() {
                          this.isLoading = true;
                          this.output = 'Initializing Python runtime...\n';
                          try {
-                             if (!this.pyodide) this.pyodide = await loadPyodide();
+                             if (!this.pyodide) {
+                                 await this.loadPyodideScript();
+                                 this.pyodide = await loadPyodide();
+                             }
                              let out = '';
                              this.pyodide.setStdout({ batched: (s) => { out += s + '\n'; } });
                              await this.pyodide.runPythonAsync(this.code);

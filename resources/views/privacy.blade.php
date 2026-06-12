@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Privacy Policy')
+@section('meta_description', 'Understand how BroKnowledge protects your data. Our privacy policy details client-side processing, data collection, and commitment to your privacy.')
 
 @section('content')
 <style>

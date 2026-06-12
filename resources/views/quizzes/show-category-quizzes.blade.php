@@ -1,7 +1,8 @@
 {{-- quizzes/show-category-quizzes.blade.php --}}
 @extends('layouts.app')
 
-@section('title', $quizCategory->title . ' Tests')
+@section('title', $quizCategory->title . ' Quizzes & Tests')
+@section('meta_description', 'Take ' . $quizCategory->title . ' quizzes and tests to challenge your skills. Practice with multiple-choice questions and get instant feedback.')
 
 @section('content')
 

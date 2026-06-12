@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('title', 'Game Zone')
+@section('meta_description', 'Take a break in the BroKnowledge Game Zone. Play classic arcade games like Snake, Tetris, and Memory Flip directly in your browser.')
 
 @section('content')
 

@@ -1,7 +1,8 @@
 {{-- quizzes/take.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Examination Hall')
+@section('title', 'Take Quiz - Examination Hall')
+@section('meta_description', 'Engage in a timed quiz challenge. Answer multiple-choice questions and test your knowledge in a focused examination environment.')
 
 @section('content')
 

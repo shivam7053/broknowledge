@@ -1,7 +1,8 @@
 {{-- home.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Welcome to BroKnowledge')
+@section('title', 'Your Developer Workspace & Learning Hub')
+@section('meta_description', 'BroKnowledge is a comprehensive platform offering coding courses, private browser-based office tools, online compilers for Python/Java/HTML, and brain-sharpening games.')
 
 @section('content')
 
@@ -551,7 +552,7 @@
                             <div>
                                 <h5>Office Tools</h5>
                                 <p>PDF merger, image compressor, Markdown editor — all client-side, all private.</p>
-                                <a href="{{ route('tools') }}" class="read-link" style="color: var(--brand); font-size:.75rem; font-weight: 700; text-decoration: none; display:inline-flex; align-items:center; gap:.3rem;">
+                            <a href="{{ route('tools.index') }}" class="read-link" style="color: var(--brand); font-size:.75rem; font-weight: 700; text-decoration: none; display:inline-flex; align-items:center; gap:.3rem;">
                                     Open tools <i class="bi bi-arrow-right" style="font-size:.7rem;"></i>
                                 </a>
                             </div>

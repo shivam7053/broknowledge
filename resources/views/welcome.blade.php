@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('title', 'All Courses')
+@section('meta_description', 'Browse our catalog of structured developer courses. Master web development, software architecture, and coding fundamentals with our step-by-step guides.')
 
 @section('content')
 
