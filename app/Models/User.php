@@ -54,8 +54,7 @@ class User extends Authenticatable implements FilamentUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        // In development, you can return true to allow all users.
-        // In production, you might check for an 'is_admin' flag or specific email.
-        return true;
+        // Only allow users with an @admin.com email to access the dashboard
+        return str_ends_with($this->email, '@admin.com');
     }
 }

@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'compiler' => [
+    'url' => env('COMPILER_API_URL', 'http://localhost:8000'),
+    ],
+
+
 ];

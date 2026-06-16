@@ -549,9 +549,17 @@
                            class="bk-nav-link accent {{ request()->routeIs('quizzes.*') ? 'active' : '' }}">
                             <span class="material-symbols-outlined">quiz</span> Quizzes
                         </a>
+                        <a href="{{ route('compilers') }}"
+                           class="bk-nav-link accent {{ request()->routeIs('compilers') ? 'active' : '' }}">
+                            <span class="material-symbols-outlined">terminal</span> Compilers
+                        </a>
                         <a href="{{ route('apis.index') }}"
                            class="bk-nav-link accent {{ request()->routeIs('apis.*') ? 'active' : '' }}">
                             <span class="material-symbols-outlined">api</span> Free APIs
+                        </a>
+                        <a href="{{ route('assets.index') }}"
+                           class="bk-nav-link accent {{ request()->routeIs('assets.*') ? 'active' : '' }}">
+                            <span class="material-symbols-outlined">category</span> Assets
                         </a>
                     </div>
                 @endif
@@ -560,7 +568,17 @@
     </nav>
 
     <!-- ══ PAGE CONTENT ═══════════════════════════════════ -->
-    <main>@yield('content')</main>
+    <main>
+        @if(session('error'))
+            <div class="container mt-4 reveal visible">
+                <div class="glass-card border-danger border-opacity-25 d-flex align-items-center gap-3 p-3 shadow-sm" role="alert">
+                    <span class="material-symbols-outlined text-danger">error</span>
+                    <div class="small fw-semibold text-danger">{{ session('error') }}</div>
+                </div>
+            </div>
+        @endif
+        @yield('content')
+    </main>
 
     <!-- ══ FOOTER ════════════════════════════════════════ -->
     <footer class="bk-footer reveal">
@@ -604,8 +622,14 @@
                         <a href="{{ route('quizzes.index') }}" class="footer-link">
                             <span class="material-symbols-outlined">quiz</span> Quizzes
                         </a>
+                        <a href="{{ route('compilers') }}" class="footer-link">
+                            <span class="material-symbols-outlined">terminal</span> Code Playground
+                        </a>
                         <a href="{{ route('apis.index') }}" class="footer-link">
                             <span class="material-symbols-outlined">api</span> Free APIs
+                        </a>
+                        <a href="{{ route('assets.index') }}" class="footer-link">
+                            <span class="material-symbols-outlined">category</span> Assets
                         </a>
                     </div>
                 </div>

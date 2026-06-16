@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\AssetDownloadController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ToolsController;
 use App\Models\Course;
@@ -33,7 +35,6 @@ Route::prefix('tools')->name('tools.')->group(function () {
     Route::get('/developer', [ToolsController::class, 'developer']) ->name('developer');
 });
 
-Route::view('/compilers', 'compilers')->name('compilers');
 
 Route::view('/privacy', 'privacy')->name('privacy');
 Route::view('/terms', 'terms')->name('terms');
@@ -45,6 +46,9 @@ Route::view('/games/snake', 'games.snake')->name('games.snake');
 Route::view('/games/tetris', 'games.tetris')->name('games.tetris');
 Route::view('/games/shooter', 'games.shooter')->name('games.shooter');
 Route::view('/games/bomber', 'games.bomber')->name('games.bomber');
+
+// Compiler Route
+Route::view('/compilers', 'compilers')->name('compilers');
 
 // Quiz Routes
 Route::prefix('quizzes')->name('quizzes.')->group(function () {
@@ -60,3 +64,9 @@ Route::get('/free-apis', function () {
     // For now, returning a static view or an empty collection if model isn't ready
     return view('apis.index', ['apis' => \App\Models\FreeApi::where('is_active', true)->latest()->get() ?? collect()]);
 })->name('apis.index');
+
+// Asset Routes
+Route::get('/assets', [AssetController::class, 'index'])->name('assets.index');
+Route::get('/assets/download/{asset}/{format}', [AssetDownloadController::class, 'download'])->name('assets.download');
+
+require __DIR__.'/compiler_web.php';
