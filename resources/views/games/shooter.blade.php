@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Shooter</title>
+    <title>Star Shooter — Retro Space Arcade Game | BroKnowledge Games</title>
+    <meta name="description" content="Defend the galaxy in Star Shooter! Shoot stars, dodge bombs, and collect power-ups in this fast-paced space arcade game. Play for free online.">
+    <link rel="canonical" href="{{ route('games.shooter') }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Star Shooter — Retro Space Arcade Game">
+    <meta property="og:description" content="Space combat action! Shoot stars, avoid bombs, and survive the cosmic onslaught.">
+    <meta property="og:url" content="{{ route('games.shooter') }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+            { "@@type": "ListItem", "position": 2, "name": "Game Zone", "item": "{{ route('games') }}" },
+            { "@@type": "ListItem", "position": 3, "name": "Star Shooter", "item": "{{ route('games.shooter') }}" }
+        ]
+    }
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap');
 

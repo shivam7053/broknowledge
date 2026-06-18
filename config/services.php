@@ -36,8 +36,11 @@ return [
     ],
 
     'compiler' => [
-    'url' => env('COMPILER_API_URL', 'http://localhost:8000'),
+        'url' => env('COMPILER_API_URL', 'http://localhost:8000'),
     ],
 
-
+    'resume_analyzer' => [
+        'url' => env('RESUME_ANALYSIS_API_URL', 'http://127.0.0.1:8001'),
+        'timeout' => env('RESUME_ANALYSIS_TIMEOUT', 30),
+    ],
 ];

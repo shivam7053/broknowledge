@@ -1,6 +1,22 @@
 {{-- resources/views/tools/pdf.blade.php --}}
 @extends('layouts.app')
-@section('title', 'PDF Tools')
+@section('title', 'Free Online PDF Tools — Merge, Split & Compress')
+@section('meta_description', 'Free browser-based PDF tools. Merge, split, compress, rotate, and watermark your PDF documents without uploading them to any server.')
+
+@section('head')
+<link rel="canonical" href="{{ route('tools.pdf') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Office Tools", "item": "{{ route('tools.index') }}" },
+        { "@@type": "ListItem", "position": 3, "name": "PDF Tools", "item": "{{ route('tools.pdf') }}" }
+    ]
+}
+</script>
+@endsection
 
 @section('content')
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>

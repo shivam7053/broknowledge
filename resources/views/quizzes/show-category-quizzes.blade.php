@@ -4,6 +4,21 @@
 @section('title', $quizCategory->title . ' Quizzes & Tests')
 @section('meta_description', 'Take ' . $quizCategory->title . ' quizzes and tests to challenge your skills. Practice with multiple-choice questions and get instant feedback.')
 
+@section('head')
+<link rel="canonical" href="{{ route('quizzes.showCategoryQuizzes', $quizCategory->slug) }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Quizzes", "item": "{{ route('quizzes.index') }}" },
+        { "@@type": "ListItem", "position": 3, "name": "{{ $quizCategory->title }}", "item": "{{ route('quizzes.showCategoryQuizzes', $quizCategory->slug) }}" }
+    ]
+}
+</script>
+@endsection
+
 @section('content')
 
 <style>

@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tetris</title>
+    <title>Retro Tetris — Classic Block Puzzle Game | BroKnowledge Games</title>
+    <meta name="description" content="Play retro Tetris online. Stack blocks, clear lines, and survive as long as you can in this classic puzzle game. No signup or download needed.">
+    <link rel="canonical" href="{{ route('games.tetris') }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Retro Tetris — Classic Block Puzzle Game">
+    <meta property="og:description" content="Stack, clear, and survive! The ultimate block-matching puzzle classic is here.">
+    <meta property="og:url" content="{{ route('games.tetris') }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+            { "@@type": "ListItem", "position": 2, "name": "Game Zone", "item": "{{ route('games') }}" },
+            { "@@type": "ListItem", "position": 3, "name": "Tetris", "item": "{{ route('games.tetris') }}" }
+        ]
+    }
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&display=swap');
 

@@ -96,6 +96,7 @@
     </a>
 
 
+
     <div class="nav-divider"></div>
 
     <a href="{{ route('tools.index') }}" class="suite-link" style="font-size:.75rem;">

@@ -1,7 +1,22 @@
 {{-- resources/views/tools/data.blade.php --}}
 @extends('layouts.app')
-@section('title', 'Data Tools')
-@section('meta_description', 'Free online data tools for CSV viewing, JSON formatting, SQL prettifying, and fake data generation. Safe, private, and runs entirely in your browser.')
+@section('title', 'JSON & Data Processing Tools — Formatter, CSV & SQL')
+@section('meta_description', 'Process data safely in your browser. JSON formatter, JSON to CSV converter, SQL prettifier, and CSV viewer. No data is sent to our servers.')
+
+@section('head')
+<link rel="canonical" href="{{ route('tools.data') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Office Tools", "item": "{{ route('tools.index') }}" },
+        { "@@type": "ListItem", "position": 3, "name": "Data Tools", "item": "{{ route('tools.data') }}" }
+    ]
+}
+</script>
+@endsection
 
 @section('content')
 

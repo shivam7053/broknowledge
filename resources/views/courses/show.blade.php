@@ -2,6 +2,47 @@
 @extends('layouts.app')
 
 @section('title', ($currentTopic ? $currentTopic->title . ' — ' : '') . $course->title)
+@section('meta_description', $currentTopic ? 'Learn ' . $course->title . ': ' . $currentTopic->title . '. Master developer concepts with our free interactive lessons.' : 'Master ' . $course->title . ' with our structured developer courses.')
+
+@section('head')
+@if($currentTopic)
+<link rel="canonical" href="{{ route('courses.show', ['course' => $course->slug, 'topic' => $currentTopic->slug]) }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ $currentTopic->title }} — {{ $course->title }}">
+<meta property="og:description" content="Read our lesson on {{ $currentTopic->title }} and advance your skills in {{ $course->title }}.">
+@else
+<link rel="canonical" href="{{ route('courses.show', $course->slug) }}">
+<meta property="og:type" content="website">
+@endif
+
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Courses", "item": "{{ route('courses.index') }}" },
+        { "@@type": "ListItem", "position": 3, "name": "{{ $course->title }}", "item": "{{ route('courses.show', $course->slug) }}" }
+        @if($currentTopic)
+        ,{ "@@type": "ListItem", "position": 4, "name": "{{ $currentTopic->title }}", "item": "{{ route('courses.show', ['course' => $course->slug, 'topic' => $currentTopic->slug]) }}" }
+        @endif
+    ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "Course",
+    "name": "{{ $course->title }}",
+    "description": "Master {{ $course->title }} through structured, developer-focused lessons and topics.",
+    "publisher": {
+        "@@type": "Organization",
+        "name": "BroKnowledge"
+    }
+}
+</script>
+@endsection
 
 @section('content')
 

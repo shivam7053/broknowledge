@@ -36,8 +36,17 @@ class QuizController extends Controller
         $questions = $quiz->questions()->inRandomOrder()->get()->map(function ($question) {
             // Shuffle options if they are an associative array
             $options = $question->options;
-            shuffle($options); // Shuffle the order of options
-            $question->options = $options;
+            
+            // Shuffle associative keys (A, B, C...) to preserve the answer mapping
+            $keys = array_keys($options);
+            shuffle($keys);
+            
+            $shuffledOptions = [];
+            foreach ($keys as $key) {
+                $shuffledOptions[$key] = $options[$key];
+            }
+            
+            $question->options = $shuffledOptions;
             return $question;
         });
         return view('quizzes.take', compact('quiz', 'questions'));

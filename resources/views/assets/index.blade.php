@@ -1,15 +1,15 @@
 {{-- assets/index.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Free Icons, Emojis & SVG Assets Library')
-@section('meta_description', 'Browse and download thousands of free SVG icons, emojis, and design assets. Filter by category, search by keyword, and export to SVG or high-res PNG instantly.')
+@section('title', 'Free SVG Icons, Emojis & Design Assets Library')
+@section('meta_description', 'Thousands of free SVG icons and emojis for developers. Filter by category, search by keyword, and export to high-res PNG instantly — no attribution required.')
 
 @section('head')
-    <link rel="canonical" href="{{ request()->url() }}{{ request()->getQueryString() ? '?'.request()->getQueryString() : '' }}">
+    <link rel="canonical" href="{{ url()->current() }}">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Free Icons, Emojis & SVG Assets Library">
-    <meta property="og:description" content="Browse and download thousands of free SVG icons and emojis. Filter by category, search by keyword, export to SVG or PNG.">
+    <meta property="og:title" content="Free SVG Icons, Emojis & Assets Library — BroKnowledge">
+    <meta property="og:description" content="Browse and download thousands of free SVG design assets. High-quality icons and emojis for your projects.">
     <meta property="og:url" content="{{ route('assets.index') }}">
     <meta property="og:site_name" content="{{ config('app.name') }}">
 
@@ -29,6 +29,19 @@
         "itemListElement": [
             { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
             { "@@type": "ListItem", "position": 2, "name": "Assets Library", "item": "{{ route('assets.index') }}" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@@type": "Question",
+                "name": "Are these assets free for commercial use?",
+                "acceptedAnswer": { "@@type": "Answer", "text": "Yes. All icons and emojis in the BroKnowledge library are available for personal and commercial use without attribution." }
+            }
         ]
     }
     </script>

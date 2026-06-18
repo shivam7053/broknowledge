@@ -1,7 +1,22 @@
 {{-- resources/views/tools/image.blade.php --}}
 @extends('layouts.app')
-@section('title', 'Image Tools')
-@section('meta_description', 'Free online image tools for compression, resizing, format conversion, cropping, watermarking, and EXIF metadata viewing. All client-side processing for privacy.')
+@section('title', 'Free Online Image Tools — Compress, Resize & Convert')
+@section('meta_description', 'Optimize and edit images client-side. Compress JPEGs, convert to WebP, resize, crop, and add watermarks instantly without uploading files.')
+
+@section('head')
+<link rel="canonical" href="{{ route('tools.image') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Office Tools", "item": "{{ route('tools.index') }}" },
+        { "@@type": "ListItem", "position": 3, "name": "Image Tools", "item": "{{ route('tools.image') }}" }
+    ]
+}
+</script>
+@endsection
 
 @section('content')
 <style>

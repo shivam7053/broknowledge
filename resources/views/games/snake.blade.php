@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake</title>
+    <title>Classic Snake Game — Play Online for Free | BroKnowledge Games</title>
+    <meta name="description" content="Play the classic Snake game online. Eat, grow, and avoid crashing in this retro arcade favorite. Features multiple speeds and high score tracking.">
+    <link rel="canonical" href="{{ route('games.snake') }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Classic Snake Game — Play Online">
+    <meta property="og:description" content="The timeless classic! Eat to grow your length, avoid the walls, and beat your high score.">
+    <meta property="og:url" content="{{ route('games.snake') }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+            { "@@type": "ListItem", "position": 2, "name": "Game Zone", "item": "{{ route('games') }}" },
+            { "@@type": "ListItem", "position": 3, "name": "Snake", "item": "{{ route('games.snake') }}" }
+        ]
+    }
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap');
 

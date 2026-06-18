@@ -9,10 +9,18 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BroKnowledge — @yield('title')</title>
+    <title>@hasSection('title') @yield('title') — BroKnowledge @else BroKnowledge — Developer Tools & Courses @endif</title>
+    <meta name="description" content="@yield('meta_description', 'BroKnowledge — courses, blog, code compilers, office tools, and games for developers and learners.')">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('logo/logo.png') }}">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:site_name" content="BroKnowledge">
+    <meta property="og:title" content="@yield('title', 'BroKnowledge — Developer Hub')">
+    <meta property="og:description" content="@yield('meta_description', 'Free online compilers, developer tools, and coding courses.')">
+    <meta property="og:image" content="{{ asset('logo/og-image.png') }}">
+    <meta name="twitter:image" content="{{ asset('logo/og-image.png') }}">
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,9 +29,10 @@
     <!-- Typography: Syne (display) + Inter (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -134,6 +143,7 @@
 
         /* ══════════════════════════════════════════════════
            NAVBAR
+           NAVBAR & MAIN CONTENT
         ══════════════════════════════════════════════════ */
         .bk-nav {
             background: var(--nav-bg);
@@ -211,6 +221,21 @@
         /* Accent links (tools, compilers) */
         .bk-nav-link.accent {
             color: var(--brand) !important;
+        }
+
+        /* ── Offcanvas Mobile Overrides ───────────────────── */
+        .bk-offcanvas {
+            background-color: var(--card-bg) !important;
+            border-left: 1px solid var(--card-border) !important;
+            backdrop-filter: blur(16px);
+        }
+        .offcanvas-header {
+            border-bottom: 1px solid var(--card-border);
+            padding: 1.25rem 1.5rem;
+        }
+        @media (max-width: 991.98px) {
+            .bk-nav-link { width: 100%; padding: 0.8rem 1.2rem; border-radius: var(--radius-sm); }
+            .bk-nav-link:hover { background: var(--brand-pale); }
         }
 
         /* Theme toggle */
@@ -451,6 +476,17 @@
             visibility: hidden;
         }
     </style>
+
+    {{-- ═══════════════════════════════════════════════════
+         PER-PAGE <head> CONTENT
+         ───────────────────────────────────────────────────
+         Child views inject extra <meta> tags, canonical
+         links, JSON-LD structured data, and page-specific
+         <style> blocks here — e.g. compilers/python.blade.php
+         does @section('head') @include('partials.compiler-styles') @endsection.
+         Without this @yield, all of that is silently dropped.
+    ═══════════════════════════════════════════════════ --}}
+    @yield('head')
 </head>
 
 <body class="loading">
@@ -505,34 +541,37 @@
     </div>
 
     <!-- ══ NAVBAR ═════════════════════════════════════════ -->
-    <nav class="bk-nav">
-        <div class="container-fluid px-lg-5 d-flex align-items-center justify-content-between gap-3">
+    <nav class="bk-nav navbar navbar-expand-lg">
+        <div class="container-fluid px-lg-5">
 
-            <a href="/" class="navbar-brand">
+            <a href="/" class="navbar-brand me-auto">
                 <img :src="darkMode ? '{{ asset('logo/logo-dark.png') }}' : '{{ asset('logo/logo-light.png') }}'" alt="BroKnowledge Logo" class="nav-logo">
             </a>
-
-            <div class="d-flex align-items-center gap-2">
+            <!-- Mobile/Desktop Controls -->
+            <div class="d-flex align-items-center gap-2 order-lg-last ms-2">
                 <!-- Controls -->
-                <div class="d-flex align-items-center gap-2 me-2">
-                    <button @click="darkMode = !darkMode; localStorage.setItem('theme', darkMode ? 'dark' : 'light')"
-                            class="theme-btn" :title="darkMode ? 'Light mode' : 'Dark mode'">
-                        <span x-show="!darkMode" class="material-symbols-outlined">dark_mode</span>
-                        <span x-show="darkMode" x-cloak class="material-symbols-outlined">light_mode</span>
-                    </button>
-
-                    <label class="game-toggle-wrap mb-0" for="gameModeToggle">
-                        <input class="form-check-input mt-0" type="checkbox" role="switch" id="gameModeToggle"
-                               {{ request()->routeIs('games') ? 'checked' : '' }}
-                               onchange="window.location.href = this.checked ? '{{ route('games') }}' : '{{ route('home') }}'">
-                        <span class="d-none d-sm-inline">Game Mode</span>
-                        <span class="d-sm-none">🎮</span>
-                    </label>
-                </div>
-
+                <button @click="darkMode = !darkMode; localStorage.setItem('theme', darkMode ? 'dark' : 'light')"
+                        class="theme-btn" :title="darkMode ? 'Light mode' : 'Dark mode'">
+                    <span x-show="!darkMode" class="material-symbols-outlined">dark_mode</span>
+                    <span x-show="darkMode" x-cloak class="material-symbols-outlined">light_mode</span>
+                </button>
+                <label class="game-toggle-wrap mb-0" for="gameModeToggle">
+                    <input class="form-check-input mt-0" type="checkbox" role="switch" id="gameModeToggle"
+                           {{ request()->routeIs('games') ? 'checked' : '' }}
+                           onchange="window.location.href = this.checked ? '{{ route('games') }}' : '{{ route('home') }}'">
+                    <span class="d-none d-sm-inline">Game Mode</span>
+                    <span class="d-sm-none">🎮</span>
+                </label>
                 @if (!request()->routeIs('games'))
-                    <!-- Nav links -->
-                    <div class="d-flex align-items-center gap-1">
+                <button class="navbar-toggler border-0 p-1 ms-1 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#bkOffcanvasMobile" aria-controls="bkOffcanvasMobile" aria-label="Toggle navigation">
+                    <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--brand); font-weight: bold;">menu</span> <!-- Toggler for mobile offcanvas -->
+                </button>
+                @endif
+            </div>
+
+            @if (!request()->routeIs('games'))
+                {{-- Desktop Navigation Links (visible on lg and up, hidden on smaller) --}}
+                <div class="navbar-nav ms-auto gap-lg-1 d-none d-lg-flex">
                         <a href="{{ route('courses.index') }}"
                            class="bk-nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}">
                             <span class="material-symbols-outlined">school</span> Courses
@@ -561,9 +600,57 @@
                            class="bk-nav-link accent {{ request()->routeIs('assets.*') ? 'active' : '' }}">
                             <span class="material-symbols-outlined">category</span> Assets
                         </a>
+                        <a href="{{ route('resume.index') }}"
+                           class="bk-nav-link accent {{ request()->routeIs('resume.*') ? 'active' : '' }}">
+                            <span class="material-symbols-outlined">description</span> Resume Check
+                        </a>
                     </div>
-                @endif
-            </div>
+                </div>
+
+                {{-- Mobile Offcanvas (hidden on lg and up, shown on smaller) --}}
+                <div class="offcanvas offcanvas-end bk-offcanvas d-lg-none" tabindex="-1" id="bkOffcanvasMobile" aria-labelledby="bkOffcanvasMobileLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title fw-bold" id="bkOffcanvasMobileLabel" style="color: var(--brand);">Menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="navbar-nav flex-column overflow-auto">
+                            <a href="{{ route('courses.index') }}"
+                               class="bk-nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}">
+                                <span class="material-symbols-outlined">school</span> Courses
+                            </a>
+                            <a href="{{ route('blog.index') }}"
+                               class="bk-nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}">
+                                <span class="material-symbols-outlined">article</span> Blog
+                            </a>
+                            <a href="{{ route('tools.index') }}"
+                               class="bk-nav-link accent {{ request()->routeIs('tools.*') ? 'active' : '' }}">
+                                <span class="material-symbols-outlined">build</span> Tools
+                            </a>
+                            <a href="{{ route('quizzes.index') }}"
+                               class="bk-nav-link accent {{ request()->routeIs('quizzes.*') ? 'active' : '' }}">
+                                <span class="material-symbols-outlined">quiz</span> Quizzes
+                            </a>
+                            <a href="{{ route('compilers') }}"
+                               class="bk-nav-link accent {{ request()->routeIs('compilers') ? 'active' : '' }}">
+                                <span class="material-symbols-outlined">terminal</span> Compilers
+                            </a>
+                            <a href="{{ route('apis.index') }}"
+                               class="bk-nav-link accent {{ request()->routeIs('apis.*') ? 'active' : '' }}">
+                                <span class="material-symbols-outlined">api</span> Free APIs
+                            </a>
+                            <a href="{{ route('assets.index') }}"
+                               class="bk-nav-link accent {{ request()->routeIs('assets.*') ? 'active' : '' }}">
+                                <span class="material-symbols-outlined">category</span> Assets
+                            </a>
+                            <a href="{{ route('resume.index') }}"
+                               class="bk-nav-link accent {{ request()->routeIs('resume.*') ? 'active' : '' }}">
+                                <span class="material-symbols-outlined">description</span> Resume Check
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </nav>
 
@@ -630,6 +717,9 @@
                         </a>
                         <a href="{{ route('assets.index') }}" class="footer-link">
                             <span class="material-symbols-outlined">category</span> Assets
+                        </a>
+                        <a href="{{ route('resume.index') }}" class="footer-link">
+                            <span class="material-symbols-outlined">description</span> Resume Check
                         </a>
                     </div>
                 </div>

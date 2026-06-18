@@ -1,8 +1,22 @@
 {{-- apis/index.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Free Public APIs')
-@section('meta_description', 'A curated directory of free public APIs for developers. Explore documentation and endpoints for your next project.')
+@section('title', 'Directory of Free Public APIs for Developers')
+@section('meta_description', 'Browse a curated directory of free public APIs. Find documentation, endpoints, and authentication details for your next development project.')
+
+@section('head')
+<link rel="canonical" href="{{ route('apis.index') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Free APIs", "item": "{{ route('apis.index') }}" }
+    ]
+}
+</script>
+@endsection
 
 @section('content')
 

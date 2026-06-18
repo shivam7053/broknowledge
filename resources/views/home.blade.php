@@ -4,6 +4,23 @@
 @section('title', 'Your Developer Workspace & Learning Hub')
 @section('meta_description', 'BroKnowledge is a comprehensive platform offering coding courses, private browser-based office tools, online compilers for Python/Java/HTML, and brain-sharpening games.')
 
+@section('head')
+<link rel="canonical" href="{{ route('home') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "WebSite",
+    "name": "BroKnowledge",
+    "url": "{{ config('app.url') }}",
+    "potentialAction": {
+        "@@type": "SearchAction",
+        "target": "{{ config('app.url') }}/blog?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+@endsection
+
 @section('content')
 
 <style>

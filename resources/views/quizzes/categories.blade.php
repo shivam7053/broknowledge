@@ -4,6 +4,20 @@
 @section('title', 'Developer Quiz Categories')
 @section('meta_description', 'Test your knowledge with our developer quizzes. Choose from various categories like web development, programming languages, and algorithms. Instant results and challenges.')
 
+@section('head')
+<link rel="canonical" href="{{ route('quizzes.index') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Quizzes", "item": "{{ route('quizzes.index') }}" }
+    ]
+}
+</script>
+@endsection
+
 @section('content')
 
 <style>

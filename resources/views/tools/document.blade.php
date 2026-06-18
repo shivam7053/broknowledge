@@ -1,6 +1,22 @@
 {{-- resources/views/tools/document.blade.php --}}
 @extends('layouts.app')
-@section('title', 'Document Tools')
+@section('title', 'Text & Document Tools — Word Count, Markdown & Diff')
+@section('meta_description', 'Clean, private text tools. Count words, edit Markdown, compare text differences, and convert cases instantly in your browser.')
+
+@section('head')
+<link rel="canonical" href="{{ route('tools.document') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Office Tools", "item": "{{ route('tools.index') }}" },
+        { "@@type": "ListItem", "position": 3, "name": "Document Tools", "item": "{{ route('tools.document') }}" }
+    ]
+}
+</script>
+@endsection
 
 @section('content')
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>

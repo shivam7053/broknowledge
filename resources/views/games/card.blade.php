@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory — Card Flip</title>
+    <title>Memory Card Flip — Brain Training Puzzle Game | BroKnowledge Games</title>
+    <meta name="description" content="Test your memory with the Card Flip game. Match pairs of emojis as fast as you can. Multiple difficulty levels available. Train your brain for free.">
+    <link rel="canonical" href="{{ route('games.card') }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Memory Card Flip — Brain Training Game">
+    <meta property="og:description" content="Challenge your recall! Match all pairs in the fewest moves possible.">
+    <meta property="og:url" content="{{ route('games.card') }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+            { "@@type": "ListItem", "position": 2, "name": "Game Zone", "item": "{{ route('games') }}" },
+            { "@@type": "ListItem", "position": 3, "name": "Memory", "item": "{{ route('games.card') }}" }
+        ]
+    }
+    </script>
+
     <style>
         /* ── Design tokens ──────────────────────────────────────────
            Palette:  Deep ink #0F0E17  |  Off-white #FFFCF2

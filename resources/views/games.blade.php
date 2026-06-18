@@ -4,6 +4,20 @@
 @section('title', 'Game Zone')
 @section('meta_description', 'Take a break in the BroKnowledge Game Zone. Play classic arcade games like Snake, Tetris, and Memory Flip directly in your browser.')
 
+@section('head')
+<link rel="canonical" href="{{ route('games') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Game Zone", "item": "{{ route('games') }}" }
+    ]
+}
+</script>
+@endsection
+
 @section('content')
 
 <style>

@@ -1,7 +1,22 @@
 {{-- blog/index.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Blog')
+@section('title', 'Technical Blog & Developer Insights')
+@section('meta_description', 'Explore technical articles, coding tutorials, and deep dives into software engineering from the BroKnowledge team.')
+
+@section('head')
+<link rel="canonical" href="{{ route('blog.index') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ route('blog.index') }}" }
+    ]
+}
+</script>
+@endsection
 
 @section('content')
 

@@ -4,6 +4,20 @@
 @section('title', 'All Courses')
 @section('meta_description', 'Browse our catalog of structured developer courses. Master web development, software architecture, and coding fundamentals with our step-by-step guides.')
 
+@section('head')
+<link rel="canonical" href="{{ route('courses.index') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Courses", "item": "{{ route('courses.index') }}" }
+    ]
+}
+</script>
+@endsection
+
 @section('content')
 
 <style>

@@ -1,7 +1,21 @@
 {{-- resources/views/tools/index.blade.php --}}
 @extends('layouts.app')
-@section('title', 'Office & Productivity Tools')
-@section('meta_description', 'Explore our browser-based office suite. Edit PDFs, manipulate images, format data, and convert documents locally and privately without uploading to any server.')
+@section('title', 'Free Online Office & Productivity Tools')
+@section('meta_description', 'A complete suite of browser-based tools for developers and office work. Merge PDFs, edit images, format JSON, and convert documents safely and privately.')
+
+@section('head')
+<link rel="canonical" href="{{ route('tools.index') }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Office Tools", "item": "{{ route('tools.index') }}" }
+    ]
+}
+</script>
+@endsection
 
 @section('content')
 <style>
@@ -73,7 +87,7 @@
                 <div class="suite-card-icon" style="background:rgba(22,163,74,.12); color:#16a34a;">
                     <i class="bi bi-file-earmark-word-fill"></i>
                 </div>
-                <h3>Document Suite <span style="font-size:.7rem; color:#16a34a; font-weight:600; margin-left:.3rem;">8 tools</span></h3>
+                <h3>Document Suite <span style="font-size:.7rem; color:#16a34a; font-weight:600; margin-left:.3rem;">11 tools</span></h3>
                 <p>Word counter, Markdown editor, text diff, case converter, Lorem Ipsum, find & replace, and more.</p>
                 <div class="mt-3">
                     @foreach(['Word Count','Markdown','Text Diff','Case Convert','Lorem Ipsum','Find & Replace','Text Sort','Duplicate Remover'] as $t)

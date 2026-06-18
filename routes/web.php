@@ -4,6 +4,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\AssetDownloadController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ToolsController;
 use App\Models\Course;
@@ -68,5 +69,9 @@ Route::get('/free-apis', function () {
 // Asset Routes
 Route::get('/assets', [AssetController::class, 'index'])->name('assets.index');
 Route::get('/assets/download/{asset}/{format}', [AssetDownloadController::class, 'download'])->name('assets.download');
+
+Route::get('/resume-check', [ResumeController::class, 'index'])->name('resume.index');
+Route::post('/resume-check', [ResumeController::class, 'analyze'])->name('resume.analyze');
+
 
 require __DIR__.'/compiler_web.php';

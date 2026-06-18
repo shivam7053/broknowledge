@@ -2,6 +2,35 @@
 @extends('layouts.app')
 
 @section('title', $post->title)
+@section('meta_description', Str::limit(strip_tags(htmlspecialchars_decode($post->html_content)), 160))
+
+@section('head')
+<link rel="canonical" href="{{ route('blog.show', $post->slug) }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ $post->title }}">
+<meta property="og:description" content="{{ Str::limit(strip_tags(htmlspecialchars_decode($post->html_content)), 160) }}">
+
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ route('blog.index') }}" },
+        { "@@type": "ListItem", "position": 3, "name": "{{ $post->title }}", "item": "{{ route('blog.show', $post->slug) }}" }
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BlogPosting",
+    "headline": "{{ $post->title }}",
+    "datePublished": "{{ $post->created_at->toIso8601String() }}",
+    "author": { "@@type": "Organization", "name": "BroKnowledge" }
+}
+</script>
+@endsection
 
 @section('content')
 

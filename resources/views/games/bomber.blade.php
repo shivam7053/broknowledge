@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BomberBlast</title>
+    <title>BomberBlast — Retro Arcade Bomb Strategy Game | BroKnowledge Games</title>
+    <meta name="description" content="Play BomberBlast online! Blast crates, defeat enemies, and collect power-ups in this classic arcade-style strategy game. Free to play, no download required.">
+    <link rel="canonical" href="{{ route('games.bomber') }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BomberBlast — Retro Arcade Bomb Strategy Game">
+    <meta property="og:description" content="Classic arcade action! Blast your way through levels, collect power-ups, and survive the explosions.">
+    <meta property="og:url" content="{{ route('games.bomber') }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+            { "@@type": "ListItem", "position": 2, "name": "Game Zone", "item": "{{ route('games') }}" },
+            { "@@type": "ListItem", "position": 3, "name": "BomberBlast", "item": "{{ route('games.bomber') }}" }
+        ]
+    }
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
 

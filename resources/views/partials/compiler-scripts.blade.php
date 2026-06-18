@@ -1,6 +1,6 @@
 {{--
     resources/views/partials/compiler-scripts.blade.php
-    Place at bottom of each compiler page (before @endsection).
+    Place at bottom of each compiler page (before the closing @@endsection).
     Expects PHP var $language to be set, e.g. 'python'
 --}}
 <script>
@@ -25,6 +25,7 @@ function compilerRunner(defaultCode) {
         exitCode:  null,
         isError:   false,
         isLoading: false,
+        elapsedMs: null,
         lang:      '{{ $language }}',
 
         async run() {
@@ -32,6 +33,7 @@ function compilerRunner(defaultCode) {
             this.isError   = false;
             this.exitCode  = null;
             this.output    = '';
+            const startedAt = performance.now();
 
             try {
                 const res = await fetch('{{ route("compiler.run") }}', {
@@ -55,6 +57,7 @@ function compilerRunner(defaultCode) {
                 this.exitCode = -1;
                 this.output   = '⚠ ' + err.message;
             } finally {
+                this.elapsedMs = Math.round(performance.now() - startedAt);
                 this.isLoading = false;
             }
         }

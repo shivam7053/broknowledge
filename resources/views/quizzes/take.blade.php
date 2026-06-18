@@ -2,7 +2,24 @@
 @extends('layouts.app')
 
 @section('title', 'Take Quiz - Examination Hall')
-@section('meta_description', 'Engage in a timed quiz challenge. Answer multiple-choice questions and test your knowledge in a focused examination environment.')
+@section('title', 'Take Quiz: ' . $quiz->title . ' - BroKnowledge')
+@section('meta_description', 'Engage in a timed quiz challenge for ' . $quiz->title . '. Answer multiple-choice questions and test your knowledge in a focused examination environment.')
+
+@section('head')
+<link rel="canonical" href="{{ route('quizzes.take', $quiz->slug) }}">
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
+        { "@@type": "ListItem", "position": 2, "name": "Quizzes", "item": "{{ route('quizzes.index') }}" },
+        { "@@type": "ListItem", "position": 3, "name": "{{ $quiz->quizCategory->title }}", "item": "{{ route('quizzes.showCategoryQuizzes', $quiz->quizCategory->slug) }}" },
+        { "@@type": "ListItem", "position": 4, "name": "{{ $quiz->title }}", "item": "{{ route('quizzes.take', $quiz->slug) }}" }
+    ]
+}
+</script>
+@endsection
 
 @section('content')
 
