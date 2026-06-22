@@ -14,7 +14,7 @@
     "itemListElement": [
         { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
         { "@@type": "ListItem", "position": 2, "name": "Quizzes", "item": "{{ route('quizzes.index') }}" },
-        { "@@type": "ListItem", "position": 3, "name": "{{ $quiz->quizCategory->title }}", "item": "{{ route('quizzes.showCategoryQuizzes', $quiz->quizCategory->slug) }}" },
+        { "@@type": "ListItem", "position": 3, "name": "{{ $quiz->category->title }}", "item": "{{ route('quizzes.showCategoryQuizzes', $quiz->category->slug) }}" },
         { "@@type": "ListItem", "position": 4, "name": "{{ $quiz->title }}", "item": "{{ route('quizzes.take', $quiz->slug) }}" }
     ]
 }

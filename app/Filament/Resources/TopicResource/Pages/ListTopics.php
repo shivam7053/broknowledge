@@ -13,6 +13,8 @@ class ListTopics extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            \Filament\Actions\ImportAction::make()
+                ->importer(\App\Filament\Imports\TopicImporter::class),
             Actions\CreateAction::make(),
         ];
     }

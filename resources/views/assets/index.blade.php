@@ -321,18 +321,81 @@
         padding: 4rem 2rem;
     }
 
-    /* ── Pagination wrapper ─────────────────────── */
-    .assets-pagination { margin-top: 3rem; }
-    .assets-pagination nav .pagination { justify-content: center; }
-    .assets-pagination .page-link {
-        border: 1px solid var(--card-border);
-        color: var(--ink-2);
-        background: var(--card-bg);
+    /* ── Pagination ─────────────────────────────── */
+    .assets-pagination {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .75rem;
     }
+
+    /* Override Bootstrap pagination to match brand */
+    .assets-pagination nav { width: 100%; }
+
+    .assets-pagination .pagination {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 0;
+    }
+
+    .assets-pagination .page-item .page-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        min-width: 40px;
+        height: 40px;
+        padding: 0 14px;
+        border-radius: 100px !important;
+        border: 1.5px solid var(--card-border);
+        background: var(--card-bg);
+        color: var(--ink-2);
+        font-size: .8rem;
+        font-weight: 600;
+        line-height: 1;
+        text-decoration: none;
+        transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+        box-shadow: none;
+    }
+
+    .assets-pagination .page-item .page-link:hover {
+        background: rgba(236,72,153,.08);
+        color: #ec4899;
+        border-color: rgba(236,72,153,.35);
+    }
+
     .assets-pagination .page-item.active .page-link {
         background: #ec4899;
         border-color: #ec4899;
         color: #fff;
+        box-shadow: 0 3px 10px rgba(236,72,153,.35);
+    }
+
+    .assets-pagination .page-item.active .page-link:hover {
+        background: #db2777;
+        border-color: #db2777;
+    }
+
+    .assets-pagination .page-item.disabled .page-link {
+        opacity: .38;
+        pointer-events: none;
+        cursor: default;
+        background: var(--card-bg);
+        color: var(--muted);
+        border-color: var(--card-border);
+    }
+
+    /* Page count helper text */
+    .pagination-meta {
+        font-size: .78rem;
+        color: var(--muted);
+    }
+
+    .pagination-meta strong {
+        color: var(--ink);
+        font-weight: 700;
     }
 
     /* ── SEO copy ───────────────────────────────── */
@@ -466,9 +529,22 @@
         @endforelse
     </div>
 
-    <div class="assets-pagination">
-        {{ $assets->links() }}
-    </div>
+    {{-- ── Pagination ───────────────────────────────────── --}}
+    @if($assets->hasPages())
+        <div class="assets-pagination">
+            {{-- Bootstrap-compatible pagination links --}}
+            {{ $assets->links('pagination::bootstrap-5') }}
+
+            {{-- Result count meta --}}
+            <p class="pagination-meta">
+                Showing
+                <strong>{{ $assets->firstItem() }}–{{ $assets->lastItem() }}</strong>
+                of
+                <strong>{{ $assets->total() }}</strong>
+                assets
+            </p>
+        </div>
+    @endif
 
     {{-- ── SEO copy block ───────────────────────────────── --}}
     <section class="assets-seo-copy reveal" aria-labelledby="assets-about-heading">
@@ -495,27 +571,25 @@ function downloadAsPng(containerId, fileName) {
     const serializer = new XMLSerializer();
     let source = serializer.serializeToString(svg);
 
-    if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+    if (!source.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
         source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
     }
-    if(!source.match(/^<svg[^>]+xmlns\:xlink="http\:\/\/www\.w3\.org\/1999\/xlink"/)){
+    if (!source.match(/^<svg[^>]+xmlns:xlink="http:\/\/www\.w3\.org\/1999\/xlink"/)) {
         source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
     }
 
-    const svgBlob = new Blob([source], {type: 'image/svg+xml;charset=utf-8'});
+    const svgBlob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
     const url = URL.createObjectURL(svgBlob);
 
     const canvas = document.createElement('canvas');
     const img = new Image();
-
     const targetSize = 1024;
     canvas.width = targetSize;
     canvas.height = targetSize;
     const ctx = canvas.getContext('2d');
 
-    img.onload = function() {
+    img.onload = function () {
         ctx.drawImage(img, 0, 0, targetSize, targetSize);
-
         const pngUrl = canvas.toDataURL('image/png');
         const downloadLink = document.createElement('a');
         downloadLink.href = pngUrl;
@@ -523,11 +597,10 @@ function downloadAsPng(containerId, fileName) {
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
-
         URL.revokeObjectURL(url);
     };
 
-    img.onerror = function() {
+    img.onerror = function () {
         alert('Failed to process the image for PNG download.');
     };
 
